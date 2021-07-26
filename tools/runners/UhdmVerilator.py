@@ -19,7 +19,6 @@ class UhdmVerilator(BaseRunner):
     def __init__(self):
         super().__init__("verilator-uhdm", "verilator-uhdm")
 
-        self.allowed_extensions.extend(['.vlt', '.cc'])
         self.url = "https://github.com/alainmarcel/uhdm-integration"
 
     def prepare_run_cb(self, tmp_dir, params):
@@ -36,7 +35,7 @@ class UhdmVerilator(BaseRunner):
             f.write("set -e\n")
             f.write('set -x\n')
             f.write(
-                'surelog -nopython -nobuiltin --disable-feature=parametersubstitution -parse -sverilog -nonote -noinfo -nowarning'
+                'surelog -nopython -nobuiltin --disable-feature=parametersubstitution -parse -sverilog'
             )
             for i in params['incdirs']:
                 f.write(f' -I{i}')

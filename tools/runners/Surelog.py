@@ -25,35 +25,21 @@ class Surelog(BaseRunner):
         if not strtobool(params['allow_elaboration']):
             self.cmd.append('-noelab')
 
-        # silence surelog
-        self.cmd.append("-nonote")
-        self.cmd.append("-noinfo")
-        self.cmd.append("-nowarning")
-
-        # force sverilog mode for .v files
         if "black-parrot" in params["tags"]:
             self.cmd.append('-sverilog')
 
-        if "basejump" in params["tags"]:
-            self.cmd.append('-sverilog')
-
-        if "ivtest" in params["tags"]:
-            self.cmd.append('-sverilog')
-
-        # lowmem option
         if "black-parrot" in params["tags"]:
             self.cmd.append('-lowmem')
 
         if "earlgrey" in params["tags"]:
             self.cmd.append('-lowmem')
 
-        # regular options
         for incdir in params['incdirs']:
             self.cmd.append('-I' + incdir)
 
         self.cmd += params['files']
 
     def is_success_returncode(self, rc, params):
-        # We're only interested in
-        # syntax, fatal and errors.
-        return rc & 0x07 == 0
+        # 1 << 4 means semantic error, but we're only interested in
+        # syntax and fatal errors.
+        return rc & 0x03 == 0

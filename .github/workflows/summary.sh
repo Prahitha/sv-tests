@@ -2,7 +2,7 @@
 
 ANALYZER=$PWD"/tools/report_analyzer.py"
 OUT_DIR=$PWD"/out/report/"
-COMPARE_REPORT=$OUT_DIR"/report.csv"
+COMPARE_REPORT=$OUT_DIR"/tests_report.csv"
 BASE_REPORT=$OUT_DIR"/base_report.csv"
 CHANGES_SUMMARY_JSON=$OUT_DIR"/tests_summary.json"
 CHANGES_SUMMARY_MD=$OUT_DIR"/tests_summary.md"
@@ -23,7 +23,7 @@ hash -r
 conda info -a
 
 # Get base report from sv-tests master run
-wget https://chipsalliance.github.io/sv-tests-results/report.csv -O $BASE_REPORT
+wget https://symbiflow.github.io/sv-tests-results/report.csv -O $BASE_REPORT
 
 # Delete headers from all report.csv
 for file in $(find ./out/report_* -name "*.csv" -print); do

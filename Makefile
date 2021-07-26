@@ -153,10 +153,6 @@ tests:
 
 generate-tests:
 
-urls:
-
-versions:
-
 report: init tests versions urls
 	./tools/sv-report --revision $(shell git rev-parse --short HEAD)
 	cp $(CONF_DIR)/report/*.css $(OUT_DIR)/report/
